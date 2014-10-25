@@ -1,0 +1,11 @@
+.popup{
+    /*width: 1788px;*/
+    display: flex;
+    flex-direction:row;
+}
+.partition{
+    display: flex;
+    flex-direction: column;
+    flex-shrink:1
+}
+

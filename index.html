@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>SuperCom conquered location</title>
+    <link rel="stylesheet" href="style/style.css"/>
+    <script src="vendor/jquary/jquery-2.1.1.min.js"></script>
+    <script src="vendor/3dGlobe/apiEarth.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <script type="text/template" id="popup">
+        <div class="popup">
+            <div class="partition left-side">zczc</div>
+            <div class="partition right-side">
+                <div class="panel top">
+                    <span class="flag"></span>
+                    <span class="placeName">{{ placeName }}</span>
+                </div>
+                <div class="panel details">
+                    <h3>{{ productName }}</h3>
+            <span class="partition">
+                <span class="icon population"></span>
+                <span class="title">population</span>
+                <span class="description">{{ populationText }}</span>
+            </span>
+            <span class="partition">
+                <span class="icon duration"></span>
+                <span class="title">duration</span>
+                <span class="description">{{ durationText }}</span>
+            </span>
+            <span class="partition">
+                <span class="icon project"></span>
+                <span class="title">project type</span>
+                <span class="description">{{ projectTypeText }}</span>
+            </span>
+                </div>
+                <div class="panel">
+                    <span class="icon star"></span>
+                    <span class="text"></span>
+                </div>
+            </div>
+
+        </div>
+    </script>
+    <script>
+        var earth;
+        var options = {
+            sky:true,
+            atmosphere: true,
+            dragging: true,
+            tilting: false,
+            zooming: false,
+            center: [46.8011, 8.2266],
+            zoom: 1
+        };
+
+        var tilesSours = [{
+            baseUrl:'http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg',
+            tileSize: 256,
+            tms: true
+        },{
+            baseUrl:'http://tile.stamen.com/toner/{z}/{x}/{y}.png',
+            attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.',
+            opacity: 0.6
+        }];
+
+
+        var config={
+            locations:[{
+                point:[12.238333,-1.5615930000000162],
+                placeName:'Burkina faso',
+                productName:'Secured driving licenses',
+                populationText:'15 Millions',
+                durationText:'4.5 Years',
+                projectTypeText:'delivery',
+                highlight:[
+                    'eID card withing 30 minutes',
+                    'Another highlight',
+                    'First card issued after 3 months',
+                    'Another highlight',
+                    'Another highlight'
+                ]
+
+            }]
+        };
+        function generateHTML (tpl,data){
+            var placeHolderReg = /{{\s*(\w*?)\s*}}/g;
+            return tpl.replace(placeHolderReg,function(match,p1,offset,string){
+                return data[p1]
+            });
+        }
+        function initializeGlobe(config) {
+            earth = new WE.map('earth_div',options);
+            popupHTML = $('#popup').html();
+            //init to center of first location
+            earth.setView(config.locations[0].point, 3);
+
+            $.each(tilesSours, function (index,tile) {
+                WE.tileLayer(tile.baseUrl,tile)
+                .addTo(earth);
+            });
+
+            // Start a simple rotation animation
+//            setInterval(function() {
+//                var c = earth.getPosition();
+//                earth.setCenter([c[0]+0.1, c[1] + 0.1]);
+//            }, 30);
+            var markerOption = {
+                maxWidth: 500,
+                closeButton: true
+            };
+            $.each(config.locations, function (index,location) {
+                WE.marker(location.point)
+                    .bindPopup(generateHTML(popupHTML,location),markerOption)
+                    .addTo(earth);
+            });
+        }
+
+        $(function(){
+            initializeGlobe(config);
+        })
+    </script>
+    <style>
+        html, body{padding: 0; margin: 0;}
+        #earth_div{ top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
+    </style>
+
+</head>
+<body >
+<div id="earth_div"></div>
+
+<style>
+    .we-pm-icon{
+        background-image:url("assets/images/map_pin.png");
+        background-position: -6px;
+        background-size: cover;
+    }
+</style>
+</body>
+</html>
