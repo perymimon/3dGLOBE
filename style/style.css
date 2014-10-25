@@ -1,11 +1,101 @@
+@import url(../assets/fonts/Open_Sans_Light/stylesheet.css);
+@import url(../assets/fonts/Open_Sans_Bold/stylesheet.css);
+#popupContainer{
+    position: fixed;
+    width: 100%;
+    background: darkred;
+}
 .popup{
     /*width: 1788px;*/
     display: flex;
     flex-direction:row;
+    height: 778px;
 }
 .partition{
-    display: flex;
-    flex-direction: column;
     flex-shrink:1
+;
+    flex-basis: 50%;
+    margin: 1px;
+    display: inline-block;
 }
 
+.partition .right-side{
+    display: flex;
+    flex-direction: column;
+}
+
+.partition.left-side {
+    width: 866px;
+}
+
+span.flag {
+    width: 180px;
+    height: 130px;
+    background: blue;
+    display: inline-block;
+}
+
+.panel.top {
+    padding: 20px;
+    height: 175px;
+    display: flex;
+    align-items: center;
+}
+
+span.placeName {
+    font-family: "open sans light";
+    /* size: 366px; */
+    color: #474747;
+    font-size: 46px;
+    margin-left: 1em;
+}
+
+.partition.right-side {
+    margin-left: 10px;
+}
+
+.panel {
+    background-color: #F3F3F3;
+    margin: 4px 0;
+}
+
+h3 {
+    margin: 26px 0;
+    font-family: "Open Sans Bold";
+    font-size: 46px;
+    color: #474747;
+}
+
+.panel.details {
+    height: 175px;
+}
+
+.icon {
+    background-image: url("assets/images/images_sprite.png");
+    display: inline-block;
+}
+
+.icon.population {
+    width: 70px;
+    height: 50px;
+    background-position: 0 -74px;
+}
+
+.details .icon {
+    float: left;
+    margin-right: 20px;
+}
+
+.details .title {
+    font-family: Open Sans Semibold;
+    display: block;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #7C7C7C;
+}
+
+.details .description {
+    font-size: 38px;
+    font-family: Open Sans;
+    color: #575757;
+}

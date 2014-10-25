@@ -7,6 +7,7 @@
     <script src="vendor/3dGlobe/apiEarth.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
+    <link rel="icon" href="http://www.supercom.com/favicon.ico" type="image/x-icon">
     <script type="text/template" id="popup">
         <div class="popup">
             <div class="partition left-side">zczc</div>
@@ -17,21 +18,21 @@
                 </div>
                 <div class="panel details">
                     <h3>{{ productName }}</h3>
-            <span class="partition">
-                <span class="icon population"></span>
-                <span class="title">population</span>
-                <span class="description">{{ populationText }}</span>
-            </span>
-            <span class="partition">
-                <span class="icon duration"></span>
-                <span class="title">duration</span>
-                <span class="description">{{ durationText }}</span>
-            </span>
-            <span class="partition">
-                <span class="icon project"></span>
-                <span class="title">project type</span>
-                <span class="description">{{ projectTypeText }}</span>
-            </span>
+                <span class="partition">
+                        <span class="icon population"></span>
+                        <span class="title">population</span>
+                        <span class="description">{{ populationText }}</span>
+                </span>
+                <span class="partition">
+                    <span class="icon duration"></span>
+                    <span class="title">duration</span>
+                    <span class="description">{{ durationText }}</span>
+                </span>
+                <span class="partition">
+                    <span class="icon project"></span>
+                    <span class="title">project type</span>
+                    <span class="description">{{ projectTypeText }}</span>
+                </span>
                 </div>
                 <div class="panel">
                     <span class="icon star"></span>
@@ -110,8 +111,8 @@
             };
             $.each(config.locations, function (index,location) {
                 WE.marker(location.point)
-                    .bindPopup(generateHTML(popupHTML,location),markerOption)
                     .addTo(earth);
+                $('#popupContainer').html(generateHTML(popupHTML,location))
             });
         }
 
@@ -127,7 +128,7 @@
 </head>
 <body >
 <div id="earth_div"></div>
-
+<div id="popupContainer"></div>
 <style>
     .we-pm-icon{
         background-image:url("assets/images/map_pin.png");
