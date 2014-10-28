@@ -1,22 +1,37 @@
+@import url(../assets/fonts/Open_Sans/stylesheet.css);
 @import url(../assets/fonts/Open_Sans_Light/stylesheet.css);
 @import url(../assets/fonts/Open_Sans_Bold/stylesheet.css);
+@import url(../assets/fonts/Open_Sans_Semibold/stylesheet.css);
+
+body{
+    background:black;
+}
+*{
+    box-sizing: border-box;
+}
 #popupContainer{
     position: fixed;
     width: 100%;
-    background: darkred;
+    /* background: darkred; */
+    z-index: 100;
 }
 .popup{
-    /*width: 1788px;*/
+    width: 1788px;
     display: flex;
     flex-direction:row;
     height: 778px;
+    margin: 80px auto;
+}
+.row{
+    display: flex;
+    margin-top: 26px;
 }
 .partition{
     flex-shrink:1
 ;
     flex-basis: 50%;
-    margin: 1px;
-    display: inline-block;
+    position: relative;
+    background: white;
 }
 
 .partition .right-side{
@@ -29,14 +44,15 @@
 }
 
 span.flag {
-    width: 180px;
-    height: 130px;
+    width: 200px;
+    height: 134px;
     background: blue;
     display: inline-block;
+    border-radius: 20px;
 }
 
 .panel.top {
-    padding: 20px;
+    /* padding: 20px; */
     height: 175px;
     display: flex;
     align-items: center;
@@ -47,47 +63,61 @@ span.placeName {
     /* size: 366px; */
     color: #474747;
     font-size: 46px;
-    margin-left: 1em;
+    margin-left: 0.7em;
 }
 
 .partition.right-side {
     margin-left: 10px;
+    /* width: 902px; */
 }
 
 .panel {
     background-color: #F3F3F3;
     margin: 4px 0;
+    padding: 20px;
 }
 
 h3 {
-    margin: 26px 0;
+    margin: 0;
     font-family: "Open Sans Bold";
     font-size: 46px;
     color: #474747;
 }
 
-.panel.details {
-    height: 175px;
+.details {
+    /* height: 175px; */
 }
 
 .icon {
-    background-image: url("assets/images/images_sprite.png");
+    background-image: url("../assets/images/images_sprite.png");
     display: inline-block;
+    vertical-align: bottom;
 }
 
 .icon.population {
     width: 70px;
-    height: 50px;
+    height: 65px;
+    background-position: 0 -74px;
+}
+.icon.duration{
+    width: 70px;
+    height: 65px;
+    background-position: 0 -74px;
+}
+.icon.project{
+    width: 70px;
+    height: 65px;
     background-position: 0 -74px;
 }
 
 .details .icon {
     float: left;
     margin-right: 20px;
+    background: yellow;
 }
 
 .details .title {
-    font-family: Open Sans Semibold;
+    font-family: "Open Sans Semibold";
     display: block;
     font-size: 17px;
     text-transform: uppercase;
@@ -98,4 +128,16 @@ h3 {
     font-size: 38px;
     font-family: Open Sans;
     color: #575757;
+}
+.panel .text {
+    font-family: Open Sans;
+    font-size: 30px;
+    font-style: italic;
+    color: #575757;
+}
+
+.icon.star {
+    width: 40px;
+    background: aquamarine;
+    height: 40px;
 }

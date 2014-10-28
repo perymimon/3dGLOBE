@@ -1,0 +1,45 @@
+{
+  "locations": [{
+      "point": [
+        12.238333,
+        -1.5615930000000162
+      ],
+      "flageImage": "someURL",
+      "placeName": "Burkina faso",
+      "productName": "Secured driving licenses",
+      "populationText": "15 Millions",
+      "durationText": "4.5 Years",
+      "projectTypeText": "delivery",
+      "highlight": [
+        "eID card withing 30 minutes",
+        "Another highlight",
+        "First card issued after 3 months",
+        "Another highlight",
+        "Another highlight"
+      ],
+      "bigImpression":[{
+        "image":"imageName",
+        "description":""
+       },{
+        "image":"imageName",
+        "description":""
+      }]
+    },{
+      "point": [
+          12.238333,
+          -1.5615930000000162
+         ],
+      "placeName": "Burkina faso",
+      "productName": "Secured driving licenses",
+      "populationText": "15 Millions",
+      "durationText": "4.5 Years",
+      "projectTypeText": "delivery",
+      "highlights": [
+        "eID card withing 30 minutes",
+        "Another highlight",
+        "First card issued after 3 months",
+        "Another highlight",
+        "Another highlight"
+        ]
+  }]
+}

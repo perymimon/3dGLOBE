@@ -3,7 +3,7 @@
 <head>
     <title>SuperCom conquered location</title>
     <link rel="stylesheet" href="style/style.css"/>
-    <script src="vendor/jquary/jquery-2.1.1.min.js"></script>
+    <script src="vendor/jquary/jquery-2.1.1.js"></script>
     <script src="vendor/3dGlobe/apiEarth.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
@@ -18,40 +18,45 @@
                 </div>
                 <div class="panel details">
                     <h3>{{ productName }}</h3>
-                <span class="partition">
-                        <span class="icon population"></span>
-                        <span class="title">population</span>
-                        <span class="description">{{ populationText }}</span>
-                </span>
-                <span class="partition">
-                    <span class="icon duration"></span>
-                    <span class="title">duration</span>
-                    <span class="description">{{ durationText }}</span>
-                </span>
-                <span class="partition">
-                    <span class="icon project"></span>
-                    <span class="title">project type</span>
-                    <span class="description">{{ projectTypeText }}</span>
-                </span>
+                    <div class="row">
+                        <span class="partition">
+                            <span class="icon population"></span>
+                            <span class="title">population</span>
+                            <span class="description">{{ populationText }}</span>
+                        </span>
+                        <span class="partition">
+                            <span class="icon duration"></span>
+                            <span class="title">duration</span>
+                            <span class="description">{{ durationText }}</span>
+                        </span>
+                        <span class="partition">
+                            <span class="icon project"></span>
+                            <span class="title">project type</span>
+                            <span class="description">{{ projectTypeText }}</span>
+                        </span>
+                    </div>
                 </div>
-                <div class="panel">
-                    <span class="icon star"></span>
-                    <span class="text"></span>
-                </div>
+
             </div>
 
+        </div>
+    </script>
+    <script type="text/template" id="popup-highlight">
+        <div class="panel">
+            <span class="icon star"></span>
+            <span class="text">{{highlight}}</span>
         </div>
     </script>
     <script>
         var earth;
         var options = {
-            sky:true,
+            sky:false,
             atmosphere: true,
             dragging: true,
             tilting: false,
             zooming: false,
             center: [46.8011, 8.2266],
-            zoom: 1
+            zoom: 5
         };
 
         var tilesSours = [{
@@ -73,7 +78,7 @@
                 populationText:'15 Millions',
                 durationText:'4.5 Years',
                 projectTypeText:'delivery',
-                highlight:[
+                highlights:[
                     'eID card withing 30 minutes',
                     'Another highlight',
                     'First card issued after 3 months',
@@ -90,8 +95,10 @@
             });
         }
         function initializeGlobe(config) {
+            var zoom = options.zoom;
             earth = new WE.map('earth_div',options);
-            popupHTML = $('#popup').html();
+           
+
             //init to center of first location
             earth.setView(config.locations[0].point, 3);
 
@@ -109,15 +116,30 @@
                 maxWidth: 500,
                 closeButton: true
             };
-            $.each(config.locations, function (index,location) {
-                WE.marker(location.point)
-                    .addTo(earth);
-                $('#popupContainer').html(generateHTML(popupHTML,location))
+
+            var popups$ = $.map(config.locations, function (location) {
+                WE.marker(location.point).addTo(earth);
+                return createPopup(location);
             });
+            $('#popupContainer').append(popups$);
+        }
+        var popupHTML = $('#popup').html(),
+            pannelHTML =$('#popup-highlight').html();
+        function createPopup(loc){
+          var  highlights$ = $(loc.highlights).map(function (index,highlights) {
+                return $(generateHTML(pannelHTML,{highlights:highlights}));
+            });
+
+
+            var popup$ = $(generateHTML(popupHTML,location));
+            highlights$.appendTo(popup$.find('.right-side'));
+                
+            return popup$;
         }
 
         $(function(){
             initializeGlobe(config);
+             earth.setZoom(zoom);
         })
     </script>
     <style>
