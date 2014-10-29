@@ -23,21 +23,28 @@
                     /*INIT GLOBE*/
                     earth = new WE.map('earth_div',data.globe);
                     //GO TO first location WITH ZOOM 5
-                    earth.setView(data.locations[0].point, 5);
+                    earth.setView(data.locations[0].point, data.globe.zoom);
                     //ADD CUSTOM MAP LYERES
                     angular.forEach(data.tileSources, function (tile) {
                         WE.tileLayer(tile.baseUrl,tile).addTo(earth);
                     });
                     //ADD MARKERS
-                    angular.forEach(data.locations, function (location) {
-                        WE.marker(location.point).addTo(earth);
+                    angular.forEach(data.locations, function (location,index) {
+                      var marker =  WE.marker(location.point).addTo(earth);
+                          marker.element.dataset.locationIndex = index;
+                          angular.element(marker.element).on('click', function () {
+                              $scope.location = data.locations[this.dataset.locationIndex];
+                              $scope.isPopupOpen = true;
+                              $scope.$digest();
+                          });
                     });
                     //ATTACK TO SCOPE
                     $scope.locations = data.locations;
-                    $scope.isPopupOpen = true;
+                    $scope.isPopupOpen = false;
 
-                    angular.element('#popupContainer', function () {
+                    angular.element('.cover-layer').on('click',function () {
                         $scope.isPopupOpen = false;
+                        $scope.$digest();
                     })
                 })
 
@@ -48,7 +55,7 @@
     <div id="earth_div"></div>
     <div class="cover-layer" ng-show="isPopupOpen">
         <div id="popupContainer" >
-        <div class="popup" ng-repeat="location in locations">
+        <div class="popup">
             <div class="partition left-side">
                 <div class="image-container">
                     <img src="assets/images/locations/{{impression.image}}" ng-repeat="impression in location.bigImpression"/>
@@ -91,15 +98,7 @@
                             </span>
                     </div>
                 </div>
-                <div class="panel highlight">
-                    <span class="icon star"></span>
-                    <span class="text">{{ highlight }}</span>
-                </div>
-                <div class="panel highlight">
-                    <span class="icon star"></span>
-                    <span class="text">{{ highlight }}</span>
-                </div>
-                <div class="panel highlight">
+                <div class="panel highlight" ng-repeat="highlight in location.highlights track by $index">
                     <span class="icon star"></span>
                     <span class="text">{{ highlight }}</span>
                 </div>
@@ -114,6 +113,9 @@
             background-image:url("assets/images/map_pin.png");
             background-position: -6px;
             background-size: cover;
+            height: 80px !important;
+            width: 80px !important;
+
         }
     </style>
 </body>
