@@ -10,7 +10,38 @@ body{
     box-sizing: border-box;
 }
 
-.image-container {}
+.button.next-location {
+    right: 0;
+}
+
+.button {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: absolute;
+    bottom: 0;
+}
+
+.button.prev-location {
+    left: 0;
+}
+
+.cover-layer {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.73);
+}
+
+.panel.highlight {
+    background: hsla(0, 0%, 94%, 0.89);
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.image-container {
+    height: 100%;
+}
 
 .image-container img {
     width: 100%;
@@ -53,29 +84,37 @@ img.ng-scope {}
     color: white;
 }
 #popupContainer{
-    position: fixed;
-    width: 100%;
+    position: absolute;
+    width: 1788px;
     /* background: darkred; */
-    z-index: 100;
+    z-index: 177;
+    /* display: flex; */
+    overflow: hidden;
+    margin: 80px auto;
+    height: 778px;
+    left: 10px;
+    right: 10px;
 }
 .popup{
     width: 1788px;
     display: flex;
     flex-direction:row;
     height: 778px;
-    margin: 80px auto;
     background-color: rgba(255,255,255,0.7);
+    flex-basis: 100%;
+    float: left;
 }
 .row{
     display: flex;
-    margin-top: 26px;
+    margin-top: 22px;
 }
 .partition{
     flex-shrink:1
 ;
     flex-basis: 50%;
     position: relative;
-    background: rgba(255,255,255,0.6);
+    /* background: rgba(255,255,255,0.6); */
+    /* opacity: 0.8; */
 }
 
 .partition .right-side{
@@ -111,13 +150,14 @@ span.placeName {
 }
 
 .partition.right-side {
-    margin-left: 10px;
+    margin-left: 5px;
     /* width: 902px; */
+    /* opacity: 0.8; */
 }
 
 .panel {
-    background-color: #F3F3F3;
-    margin: 4px 0;
+    background-color: rgba(255, 255, 255, 0.90);
+    margin: 2px 0;
     padding: 20px;
 }
 
@@ -128,7 +168,7 @@ span.placeName {
 h3 {
     margin: 0;
     font-family: "Open Sans Bold";
-    font-size: 46px;
+    font-size: 39px;
     color: #474747;
 }
 
@@ -144,24 +184,24 @@ h3 {
 
 .icon.population {
     width: 70px;
-    height: 65px;
+    height: 55px;
     background-position: 0 -74px;
 }
 .icon.duration{
     width: 70px;
-    height: 65px;
+    height: 54px;
     background-position: 0 -74px;
 }
 .icon.project{
     width: 70px;
-    height: 65px;
+    height: 54px;
     background-position: 0 -74px;
 }
 
 .details .icon {
     float: left;
-    margin-right: 20px;
-    background: yellow;
+    margin-right: 12px;
+    background: rgb(108, 108, 90);
 }
 
 .details .title {
@@ -173,19 +213,20 @@ h3 {
 }
 
 .details .description {
-    font-size: 38px;
+    font-size: 30px;
     font-family: Open Sans;
     color: #575757;
 }
 .panel .text {
     font-family: Open Sans;
-    font-size: 30px;
+    font-size: 26px;
     font-style: italic;
     color: #575757;
+    margin-left: 10px;
 }
 
 .icon.star {
-    width: 40px;
+    width: 30px;
     background: aquamarine;
-    height: 40px;
+    height: 30px;
 }

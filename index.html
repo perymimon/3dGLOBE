@@ -43,12 +43,11 @@
 
             })
     </script>
-
-
 </head>
 <body ng-controller="mainCtrl">
     <div id="earth_div"></div>
-    <div id="popupContainer" ng-show="isPopupOpen">
+    <div class="cover-layer" ng-show="isPopupOpen">
+        <div id="popupContainer" >
         <div class="popup" ng-repeat="location in locations">
             <div class="partition left-side">
                 <div class="image-container">
@@ -92,12 +91,23 @@
                             </span>
                     </div>
                 </div>
-                <div class="panel" ng-repeat="highlight in location.highlights track by $index">
+                <div class="panel highlight">
+                    <span class="icon star"></span>
+                    <span class="text">{{ highlight }}</span>
+                </div>
+                <div class="panel highlight">
+                    <span class="icon star"></span>
+                    <span class="text">{{ highlight }}</span>
+                </div>
+                <div class="panel highlight">
                     <span class="icon star"></span>
                     <span class="text">{{ highlight }}</span>
                 </div>
             </div>
         </div>
+    </div>
+        <div class="button next-location"></div>
+        <div class="button prev-location"></div>
     </div>
     <style>
         .we-pm-icon{
