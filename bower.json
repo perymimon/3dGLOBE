@@ -1,0 +1,25 @@
+{
+  "name": "3dGLOBE",
+  "version": "1.0",
+  "homepage": "https://github.com/perymimon/3dGLOBE",
+  "authors": [
+    "perymimon <pery.mimon@gmail.com>"
+  ],
+  "description": "a 3d globe of copmany locations",
+  "main": "index.html",
+  "keywords": [
+    "3d",
+    "globe"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.0"
+  }
+}

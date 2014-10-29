@@ -77,6 +77,10 @@ span.placeName {
     padding: 20px;
 }
 
+.panel:first-child {
+    margin-top: 0;
+}
+
 h3 {
     margin: 0;
     font-family: "Open Sans Bold";
