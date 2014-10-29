@@ -1,45 +1,479 @@
 {
-  "locations": [{
+  "globe": {
+    "sky": false,
+    "atmosphere": true,
+    "dragging": true,
+    "tilting": false,
+    "zooming": false,
+    "center": [
+      46.8011,
+      8.2266
+    ],
+    "zoom": 5
+  },
+  "tileSources": [
+    {
+      "baseUrl": "http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg",
+      "tileSize": 256,
+      "tms": true
+    },
+    {
+      "baseUrl": "http://tile.stamen.com/toner/{z}/{x}/{y}.png",
+      "attribution": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.",
+      "opacity": 0.6
+    }
+  ],
+  "locations": [
+    {
       "point": [
-        12.238333,
-        -1.5615930000000162
+        -6.36903,
+        34.88882
       ],
-      "flageImage": "someURL",
-      "placeName": "Burkina faso",
-      "productName": "Secured driving licenses",
-      "populationText": "15 Millions",
-      "durationText": "4.5 Years",
-      "projectTypeText": "delivery",
+      "flageImage": "flag_tanzania.png",
+      "placeName": "TANZANIA",
+      "productName": "National electronic Driving License (eDL)",
+      "populationText": "50M",
+      "durationText": "Over 4 years",
+      "projectTypeText": "BOT - financing scheme for 3 years and complete Transfer",
       "highlight": [
-        "eID card withing 30 minutes",
-        "Another highlight",
-        "First card issued after 3 months",
-        "Another highlight",
-        "Another highlight"
+        "Improved number of issued DL cards",
+        "Reduced Drivers fraud",
+        "Reduced car accidents",
+        "Issued over 1.5 smart Driver Licenses",
+        ""
       ],
-      "bigImpression":[{
-        "image":"imageName",
-        "description":""
-       },{
-        "image":"imageName",
-        "description":""
-      }]
-    },{
+      "bigImpression": [
+        {
+          "image": "tanzania.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
       "point": [
-          12.238333,
-          -1.5615930000000162
-         ],
-      "placeName": "Burkina faso",
-      "productName": "Secured driving licenses",
-      "populationText": "15 Millions",
-      "durationText": "4.5 Years",
-      "projectTypeText": "delivery",
-      "highlights": [
-        "eID card withing 30 minutes",
-        "Another highlight",
-        "First card issued after 3 months",
-        "Another highlight",
-        "Another highlight"
-        ]
-  }]
+        -6.821078,
+        39.284546
+      ],
+      "flageImage": "flag_tanzania.png",
+      "placeName": "Tanzania Revenue Authority � TIN AFIS",
+      "productName": "Tax Payer Biometric Identification System",
+      "populationText": "50M",
+      "durationText": "Over 4 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "TIN AFIS Project",
+        "Less fraud",
+        "Unique ID for tax payers",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "tanzania.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        -1.831239,
+        -78.183406
+      ],
+      "flageImage": "flag_ecuador.png",
+      "placeName": "ECUADOR",
+      "productName": "Mass Population Registry and National eID",
+      "populationText": "15M",
+      "durationText": "More than 5 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "eID Card Within 30 Min (�While You Wait�)",
+        "Extremely rapid project implementation (first eID card issued within 3 months)",
+        "Already registered and issued more than 10M eID cards",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "ecuador.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        8.537981,
+        -80.782127
+      ],
+      "flageImage": "flag_panama.png",
+      "placeName": "PANAMA",
+      "productName": "Biometric VISA & Border Control",
+      "populationText": "4M",
+      "durationText": "More than 3 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Installed in Panama International Airport",
+        "Installed also at Embassies",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "panama.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        -6.165917,
+        39.202641
+      ],
+      "flageImage": "flag_zanzibar.png",
+      "placeName": "ZANZIBAR",
+      "productName": "National ID & Voter Registration (+AFIS)",
+      "populationText": "1.3M",
+      "durationText": "More than 10 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "�One voter - One vote�",
+        "Mass population registration completed within 4 months",
+        "Issued National IDs and Voter Cards",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "zanzibar.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        47.411631,
+        28.369885
+      ],
+      "flageImage": "flag_moldova.png",
+      "placeName": "MOLDOVA",
+      "productName": "Multi ID - ID, Driver & Vehicle Licenses ePassport, & Border Control",
+      "populationText": "3.5M",
+      "durationText": "Duration: More than 17 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "All national IDs (ePassport, ID, DL, VL and more) are issued by SuperCom",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "moldova.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        9.145,
+        40.489673
+      ],
+      "flageImage": "flag_ethiopia.png",
+      "placeName": "ETHIOPIA",
+      "productName": "Passport, VISA & Foreign ID Personalization",
+      "populationText": "97M",
+      "durationText": "More than 11 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Issued over 2M Passports",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "ethiopia.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        64.963051,
+        -19.020835
+      ],
+      "flageImage": "flag_iceland.png",
+      "placeName": "ICELAND",
+      "productName": "ePassport Issuing & Control",
+      "populationText": "320K",
+      "durationText": "More than 7 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Graphical and Electronic Personalization",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "iceland.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        48.379433,
+        31.16558
+      ],
+      "flageImage": "flag_ukraine.png",
+      "placeName": "UKRAINE",
+      "productName": "Passport & Visa Project",
+      "populationText": "44M",
+      "durationText": "1 year",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Raw Materials & Consumables",
+        "High Security Features",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "ukrain.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        22.396428,
+        114.109497
+      ],
+      "flageImage": "flag_hongkong.png",
+      "placeName": "HONG KONG",
+      "productName": "Passport Personalization",
+      "populationText": "7M",
+      "durationText": "5 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "High Security Features",
+        "Issued millions of Passports",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "china.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        35.86166,
+        104.195397
+      ],
+      "flageImage": "flag_china.png",
+      "placeName": "CHINA",
+      "productName": "CRP: China Re-entry Permit",
+      "populationText": "7M",
+      "durationText": "10 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Issued: over 10 million of cards",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "crp.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        22.198,
+        113.5473
+      ],
+      "flageImage": "flag_macau.png",
+      "placeName": "MACAU",
+      "productName": "China Re-entry Permit",
+      "populationText": "60K",
+      "durationText": "10 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "macau.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        666,
+        666
+      ],
+      "flageImage": "flag_uk.png",
+      "placeName": "THE UK",
+      "productName": "Passport Personalization",
+      "populationText": "63M",
+      "durationText": "7 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Software, consumables, Maintenance & Support",
+        "Distributed passport personalization across the UK",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "uk.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        42.315407,
+        43.356892
+      ],
+      "flageImage": "flag_georgia.png",
+      "placeName": "GEORGIA",
+      "productName": "Driving, Vehicle Licenses",
+      "populationText": "3 years",
+      "durationText": "Over4years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Drivers & Vehicle Registration",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "georgia.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        31.046051,
+        34.851612
+      ],
+      "flageImage": "flag_israel.png",
+      "placeName": "ISRAEL",
+      "productName": "Secured Driving Licenses & Fire Arms Licenses",
+      "populationText": "8M",
+      "durationText": "6 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Software Applications",
+        "Cards personalization & Delivery",
+        "",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "israel.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        53.709807,
+        27.953389
+      ],
+      "flageImage": "flag_belarus.png",
+      "placeName": "BELARUS",
+      "productName": "Driving & Vehicle Licenses Project",
+      "populationText": "9M",
+      "durationText": "3 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Drivers, Vehicles cards",
+        "Special durable card material",
+        "!!!",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "belarus.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        45.943161,
+        24.96676
+      ],
+      "flageImage": "flag_romania.png",
+      "placeName": "ROMANIA",
+      "productName": "National ID Card",
+      "populationText": "22M",
+      "durationText": "4 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Hundreds of capture stations",
+        "Decentralized ID Card personalization",
+        "Software, consumables & support",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "romania.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "point": [
+        51.919438,
+        19.145136
+      ],
+      "flageImage": "flag_poland.png",
+      "placeName": "POLAND",
+      "productName": "Electronic Passports Inlays",
+      "populationText": "38M",
+      "durationText": "4 years",
+      "projectTypeText": "Delivery",
+      "highlight": [
+        "Contactless smart Passport inlays",
+        "Supplied over than 2M smart Passport Inlays",
+        "!!!",
+        "",
+        ""
+      ],
+      "bigImpression": [
+        {
+          "image": "poland.jpg",
+          "description": ""
+        }
+      ]
+    }
+  ]
 }
+

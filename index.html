@@ -16,111 +16,95 @@
     </style>
     <script>
         var earth;
-        var options = {
-            sky:false,
-            atmosphere: true,
-            dragging: true,
-            tilting: false,
-            zooming: false,
-            center: [46.8011, 8.2266],
-            zoom: 5
-        };
 
-        var tilesSours = [{
-            baseUrl:'http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg',
-            tileSize: 256,
-            tms: true
-        },{
-            baseUrl:'http://tile.stamen.com/toner/{z}/{x}/{y}.png',
-            attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.',
-            opacity: 0.6
-        }];
-        var config={
-            locations:[{
-                point:[12.238333,-1.5615930000000162],
-                placeName:'Burkina faso',
-                productName:'Secured driving licenses',
-                populationText:'15 Millions',
-                durationText:'4.5 Years',
-                projectTypeText:'delivery',
-                highlights:[
-                    'eID card withing 30 minutes',
-                    'Another highlight',
-                    'First card issued after 3 months',
-                    'Another highlight',
-                    'Another highlight'
-                ]
-
-            }]
-        };
         angular.module('globeLocation',[])
-            .controller('mainCtrl',function($scope){
-                    var zoom = options.zoom;
-                    earth = new WE.map('earth_div',options);
-                    //init to center of first location
-                    earth.setView(config.locations[0].point, 5);
-
-                    $.each(tilesSours, function (index,tile) {
-                        WE.tileLayer(tile.baseUrl,tile)
-                                .addTo(earth);
+            .controller('mainCtrl',function($scope,$http,$document){
+                $http.get('config.json').success(function (data) {
+                    /*INIT GLOBE*/
+                    earth = new WE.map('earth_div',data.globe);
+                    //GO TO first location WITH ZOOM 5
+                    earth.setView(data.locations[0].point, 5);
+                    //ADD CUSTOM MAP LYERES
+                    angular.forEach(data.tileSources, function (tile) {
+                        WE.tileLayer(tile.baseUrl,tile).addTo(earth);
                     });
-                    var markerOption = {
-                        maxWidth: 500,
-                        closeButton: true
-                    };
-                    angular.forEach(config.locations, function (location) {
+                    //ADD MARKERS
+                    angular.forEach(data.locations, function (location) {
                         WE.marker(location.point).addTo(earth);
-                        //                return createPopup(location);
                     });
-                    $scope.locations = config.locations;
+                    //ATTACK TO SCOPE
+                    $scope.locations = data.locations;
+                    $scope.isPopupOpen = true;
+
+                    angular.element('#popupContainer', function () {
+                        $scope.isPopupOpen = false;
+                    })
+                })
+
             })
     </script>
 
 
 </head>
 <body ng-controller="mainCtrl">
-<div id="earth_div"></div>
-<div id="popupContainer" >
-    <div class="popup" ng-repeat="location in locations">
-        <div class="partition left-side">zczc</div>
-        <div class="partition right-side">
-            <div class="panel top">
-                <span class="flag"></span>
-                <span class="placeName">{{ location.placeName }}</span>
-            </div>
-            <div class="panel details">
-                <h3>{{ location.productName }}</h3>
-                <div class="row">
-                        <span class="partition">
-                            <span class="icon population"></span>
-                            <span class="title">population</span>
-                            <span class="description">{{ location.populationText }}</span>
-                        </span>
-                        <span class="partition">
-                            <span class="icon duration"></span>
-                            <span class="title">duration</span>
-                            <span class="description">{{ location.durationText }}</span>
-                        </span>
-                        <span class="partition">
-                            <span class="icon project"></span>
-                            <span class="title">project type</span>
-                            <span class="description">{{ location.projectTypeText }}</span>
-                        </span>
+    <div id="earth_div"></div>
+    <div id="popupContainer" ng-show="isPopupOpen">
+        <div class="popup" ng-repeat="location in locations">
+            <div class="partition left-side">
+                <div class="image-container">
+                    <img src="assets/images/locations/{{impression.image}}" ng-repeat="impression in location.bigImpression"/>
+                </div>
+                <div class="image-navigation">
+                    <div class="image-controller previous-image">
+                        <span class="icon arrow-1-left"><<</span>
+                    </div>
+                    <div class="image-controller next-image">
+                        <span class="icon arrow-2-right">>></span>
+                    </div>
+                    <div class="image-description">
+
+
+                    </div>
                 </div>
             </div>
-            <div class="panel" ng-repeat="highlight in location.highlights track by $index">
-                <span class="icon star"></span>
-                <span class="text">{{ highlight }}</span>
+            <div class="partition right-side">
+                <div class="panel top">
+                    <img class="flag" ng-src="assets/images/flages/{{location.flageImage}}">
+                    <span class="placeName">{{ location.placeName }}</span>
+                </div>
+                <div class="panel details">
+                    <h3>{{ location.productName }}</h3>
+                    <div class="row">
+                            <span class="partition">
+                                <span class="icon population"></span>
+                                <span class="title">population</span>
+                                <span class="description">{{ location.populationText }}</span>
+                            </span>
+                            <span class="partition">
+                                <span class="icon duration"></span>
+                                <span class="title">duration</span>
+                                <span class="description">{{ location.durationText }}</span>
+                            </span>
+                            <span class="partition">
+                                <span class="icon project"></span>
+                                <span class="title">project type</span>
+                                <span class="description">{{ location.projectTypeText }}</span>
+                            </span>
+                    </div>
+                </div>
+                <div class="panel" ng-repeat="highlight in location.highlights track by $index">
+                    <span class="icon star"></span>
+                    <span class="text">{{ highlight }}</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<style>
-    .we-pm-icon{
-        background-image:url("assets/images/map_pin.png");
-        background-position: -6px;
-        background-size: cover;
-    }
-</style>
+    <style>
+        .we-pm-icon{
+            background-image:url("assets/images/map_pin.png");
+            background-position: -6px;
+            background-size: cover;
+        }
+    </style>
 </body>
 </html>
