@@ -16,134 +16,162 @@
     </style>
     <script>
         var earth,
-            inAnimation = false;
+            inAnimation = false,
+            step = 0.1;
 
-        function loop() {
-            if(!inAnimation) return;
-            var c = earth.getPosition();
-            earth.setCenter([c[0], c[1] + 0.05]);
-            requestAnimationFrame(loop);
-        }
-        function startEarthAnimation(){
-            if(inAnimation)return;
-            inAnimation = true;
-            requestAnimationFrame(loop);
-        }
-        function stopEarthAnimation(){
-            inAnimation = false;
-        }
         angular.module('globeLocation',[])
             .controller('mainCtrl',function($scope,$http,$document){
-                var locationIndex = 0;
+                var locations,
+                    locationIndex = 0;
+
+                function loop() {
+                    if(!inAnimation) return;
+                    var c = earth.getPosition();
+                    var p = locations[locationIndex].point;
+                    var dx = p[0]-c[0];
+                    var dy = p[1]-c[1];
+                    var dis = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
+                    if (dis<=step){
+                        nextLocation();
+                        loop();
+                        return;
+                    }
+                    var ratio = dis/step;
+                    var stpx = dx/ratio;
+                    var stpy = dy/ratio;
+                    earth.setCenter([c[0]+stpx, c[1]+stpy]);
+//                    earth.setCenter([c[0], c[1] + 0.05]);
+
+                    requestAnimationFrame(loop);
+                }
+                function nextIndex(){return (locationIndex+1) % locations.length;}
+                function prevIndex(){return (locationIndex-1 + locations.length) % locations.length;}
+                function startEarthAnimation(){
+                    if(inAnimation)return;
+                    inAnimation = true;
+                    nextLocation();
+                    requestAnimationFrame(loop);
+                }
+                function stopEarthAnimation(){
+                    inAnimation = false;
+                }
+                function goToLocation(){
+                    $scope.$applyAsync(function () {
+                        $scope.location = locations[locationIndex];
+                        earth.panTo($scope.location.point, {duration: 0.4});
+                    })
+                }
+                function nextLocation(){
+                    locationIndex = nextIndex();
+                    goToLocation();
+                }
+                function prevLocation(){
+                    locationIndex = prevIndex();
+                    goToLocation();
+                }
+                function closePopup(){
+                    $scope.$applyAsync(function () {
+                        $scope.isPopupOpen = false;
+                        startEarthAnimation();
+                    });
+                }
+                $scope.closePopup = closePopup;
+                function openPopup(){
+                    stopEarthAnimation();
+                    $scope.isPopupOpen = true;
+                    goToLocation();
+                }
+                $scope.openPopup = openPopup;
                 $http.get('config.json').success(function (data) {
+                    //ATTACK TO SCOPE
+                    $scope.isPopupOpen = false;
+                    $scope.locations = locations = data.locations;
                     /*INIT GLOBE*/
                     earth = new WE.map('earth_div',data.globe);
                     //GO TO first location WITH ZOOM 5
-                    earth.setView(data.locations[locationIndex].point, data.globe.zoom);
+                    earth.setView(locations[locationIndex].point, data.globe.zoom);
                     //ADD CUSTOM MAP LYERES
                     angular.forEach(data.tileSources, function (tile) {
                         WE.tileLayer(tile.baseUrl,tile).addTo(earth);
                     });
                     //ADD MARKERS
-                    angular.forEach(data.locations, function (location,index) {
+                    angular.forEach(locations, function (location,index) {
                       var marker =  WE.marker(location.point).addTo(earth);
                           marker.element.dataset.locationIndex = index;
                           angular.element(marker.element).on('click', function () {
-                              stopEarthAnimation();
                               locationIndex = this.dataset.locationIndex;
-                              $scope.location = data.locations[locationIndex];
-                              earth.panTo($scope.location.point,{duration:0.4});
-                              $scope.isPopupOpen = true;
-                              $scope.$digest();
+                              openPopup();
                           });
                     });
-                    //ATTACK TO SCOPE
-                    $scope.locations = data.locations;
-                    $scope.isPopupOpen = false;
-
-                    angular.element('.cover-layer').on('click',function () {
-                         $scope.isPopupOpen = false;
-                         startEarthAnimation();
-                         $scope.$digest();
-                    });
-                    angular.element('.button.prev-location').on('click',function(){
-                        locationIndex = (--locationIndex) % data.locations.length;
-                        $scope.location = data.locations[locationIndex];
-                        earth.panTo($scope.location.point,{duration:0.4});
-                        $scope.$digest();
-                    });
-                    angular.element('.button.next-location').on('click',function(){
-                        locationIndex = (++locationIndex) % data.locations.length;
-                        $scope.location = data.locations[locationIndex];
-                        earth.panTo($scope.location.point,{duration:0.4});
-                        $scope.$digest();
-                    });
+                    angular.element('.cover-layer').on('click',closePopup);
+                    angular.element('.button.prev-location').on('click',nextLocation);
+                    angular.element('.button.next-location').on('click',prevLocation);
+                    goToLocation();
                     startEarthAnimation();
-
                 })
-
             })
     </script>
 </head>
 <body ng-controller="mainCtrl">
     <div id="earth_div"></div>
-    <div class="container" ng-show="isPopupOpen">
-        <div class="cover-layer"></div>
+    <div class="container" ng-class="{'popup-open':isPopupOpen,'popup-close':!isPopupOpen}">
+        <div class="cover-layer" ng-click="closePopup()"></div>
         <div class="button next-location">
             <span class="icon arrow-2-left"></span>
             <span class="icon arrow-2-right"></span>
         </div>
         <div class="button prev-location"></div>
-        <div id="popupContainer" >
-        <div class="popup">
-            <div class="partition left-side">
-                <div class="image-container">
-                    <img src="assets/images/locations/{{impression.image}}" ng-repeat="impression in location.bigImpression"/>
-                </div>
-                <div class="image-navigation">
-                    <div class="image-controller previous-image">
-                        <span class="icon arrow-1-left"></span>
+        <div class="title">go to</div>
+        <div id="popupContainer" ng-click="openPopup()" >
+            <div class="popup">
+                <div class="partition left-side">
+                    <div class="image-container">
+                        <img src="assets/images/locations/{{impression.image}}" ng-repeat="impression in location.bigImpression"/>
                     </div>
-                    <div class="image-controller next-image">
-                        <span class="icon arrow-1-right">>></span>
-                    </div>
-                    <div class="image-description">
-                        {{location.bigImpression[0].description}}
-                    </div>
-                </div>
-            </div>
-            <div class="partition right-side">
-                <div class="panel top">
-                    <img class="flag" ng-src="assets/images/flages/{{location.flageImage}}">
-                    <span class="placeName">{{ location.placeName }}</span>
-                </div>
-                <div class="panel details">
-                    <h3>{{ location.productName }}</h3>
-                    <div class="row">
-                            <span class="partition">
-                                <span class="icon population"></span>
-                                <span class="title">population</span>
-                                <span class="description">{{ location.populationText }}</span>
-                            </span>
-                            <span class="partition">
-                                <span class="icon duration"></span>
-                                <span class="title">duration</span>
-                                <span class="description">{{ location.durationText }}</span>
-                            </span>
-                            <span class="partition">
-                                <span class="icon project"></span>
-                                <span class="title">project type</span>
-                                <span class="description">{{ location.projectTypeText }}</span>
-                            </span>
+                    <div class="image-navigation">
+                        <div class="image-controller previous-image">
+                            <span class="icon arrow-1-left"></span>
+                        </div>
+                        <div class="image-controller next-image">
+                            <span class="icon arrow-1-right">>></span>
+                        </div>
+                        <div class="image-description">
+                            {{location.bigImpression[0].description}}
+                        </div>
                     </div>
                 </div>
-                <div class="panel highlight" ng-repeat="highlight in location.highlights track by $index">
-                    <span class="icon star"></span>
-                    <span class="text">{{ highlight }}</span>
+                <div class="partition right-side">
+                    <div class="panel top">
+                        <img class="flag" ng-src="assets/images/flages/{{location.flageImage}}">
+                        <span class="placeName">{{ location.placeName }}</span>
+                    </div>
+                    <div class="panel details">
+                        <h3>{{ location.productName }}</h3>
+                        <div class="row">
+                                <span class="partition">
+                                    <span class="icon population"></span>
+                                    <span class="title">population</span>
+                                    <span class="description">{{ location.populationText }}</span>
+                                </span>
+                                <span class="partition">
+                                    <span class="icon duration"></span>
+                                    <span class="title">duration</span>
+                                    <span class="description">{{ location.durationText }}</span>
+                                </span>
+                                <span class="partition">
+                                    <span class="icon project"></span>
+                                    <span class="title">project type</span>
+                                    <span class="description">{{ location.projectTypeText }}</span>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="panel highlight" ng-repeat="highlight in location.highlights track by $index">
+                        <span class="icon star"></span>
+                        <span class="text">{{ highlight }}</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
     <style>

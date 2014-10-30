@@ -91,6 +91,7 @@ img.ng-scope {}
     color: white;
 }
 #popupContainer{
+
     position: absolute;
     width: 1788px;
     /* background: darkred; */
@@ -102,6 +103,28 @@ img.ng-scope {}
     left: 10px;
     right: 10px;
     border-radius: 20px;
+}
+.title {
+    color: white;
+    font-size: 40px;
+    z-index: 300;
+    text-align: center;
+    position: relative;
+    text-shadow: 0 0 3px black;
+}
+
+.container.popup-close #popupContainer{
+    zoom: 0.2;
+}
+.container.popup-close .cover-layer{
+    display: none;
+}
+.container.popup-close .button{
+    display: none;
+}
+
+.container.popup-open .title{
+    display: none;
 }
 .popup{
     width: 1788px;

@@ -11,7 +11,7 @@
     ],
     "zoom": 3.4,
     "minZoom":1,
-    "maxZoom":10
+    "maxZoom":4
   },
   "tileSources": [
     {
