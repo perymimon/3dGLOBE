@@ -15,8 +15,23 @@
         #earth_div{ top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
     </style>
     <script>
-        var earth;
+        var earth,
+            inAnimation = false;
 
+        function loop() {
+            if(!inAnimation) return;
+            var c = earth.getPosition();
+            earth.setCenter([c[0], c[1] + 0.05]);
+            requestAnimationFrame(loop);
+        }
+        function startEarthAnimation(){
+            if(inAnimation)return;
+            inAnimation = true;
+            requestAnimationFrame(loop);
+        }
+        function stopEarthAnimation(){
+            inAnimation = false;
+        }
         angular.module('globeLocation',[])
             .controller('mainCtrl',function($scope,$http,$document){
                 var locationIndex = 0;
@@ -34,8 +49,10 @@
                       var marker =  WE.marker(location.point).addTo(earth);
                           marker.element.dataset.locationIndex = index;
                           angular.element(marker.element).on('click', function () {
+                              stopEarthAnimation();
                               locationIndex = this.dataset.locationIndex;
                               $scope.location = data.locations[locationIndex];
+                              earth.panTo($scope.location.point,{duration:0.4});
                               $scope.isPopupOpen = true;
                               $scope.$digest();
                           });
@@ -46,6 +63,7 @@
 
                     angular.element('.cover-layer').on('click',function () {
                          $scope.isPopupOpen = false;
+                         startEarthAnimation();
                          $scope.$digest();
                     });
                     angular.element('.button.prev-location').on('click',function(){
@@ -59,7 +77,8 @@
                         $scope.location = data.locations[locationIndex];
                         earth.panTo($scope.location.point,{duration:0.4});
                         $scope.$digest();
-                    })
+                    });
+                    startEarthAnimation();
 
                 })
 
