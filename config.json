@@ -4,12 +4,14 @@
     "atmosphere": true,
     "dragging": true,
     "tilting": false,
-    "zooming": false,
+    "zooming": true,
     "center": [
       46.8011,
       8.2266
     ],
-    "zoom": 5
+    "zoom": 3.4,
+    "minZoom":1,
+    "maxZoom":10
   },
   "tileSources": [
     {
@@ -20,7 +22,7 @@
     {
       "baseUrl": "http://tile.stamen.com/toner/{z}/{x}/{y}.png",
       "attribution": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.",
-      "opacity": 0.6
+      "opacity": 0.4
     }
   ],
   "locations": [
@@ -35,17 +37,16 @@
       "populationText": "50M",
       "durationText": "Over 4 years",
       "projectTypeText": "BOT - financing scheme for 3 years and complete Transfer",
-      "highlight": [
+      "highlights": [
         "Improved number of issued DL cards",
         "Reduced Drivers fraud",
         "Reduced car accidents",
-        "Issued over 1.5 smart Driver Licenses",
-        ""
+        "Issued over 1.5 smart Driver Licenses"       
       ],
       "bigImpression": [
         {
           "image": "tanzania.jpg",
-          "description": ""
+          "description": "registration"
         }
       ]
     },
@@ -60,7 +61,7 @@
       "populationText": "50M",
       "durationText": "Over 4 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "TIN AFIS Project",
         "Less fraud",
         "Unique ID for tax payers",
@@ -85,7 +86,7 @@
       "populationText": "15M",
       "durationText": "More than 5 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "eID Card Within 30 Min (�While You Wait�)",
         "Extremely rapid project implementation (first eID card issued within 3 months)",
         "Already registered and issued more than 10M eID cards",
@@ -110,7 +111,7 @@
       "populationText": "4M",
       "durationText": "More than 3 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Installed in Panama International Airport",
         "Installed also at Embassies",
         "",
@@ -135,7 +136,7 @@
       "populationText": "1.3M",
       "durationText": "More than 10 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "�One voter - One vote�",
         "Mass population registration completed within 4 months",
         "Issued National IDs and Voter Cards",
@@ -160,11 +161,8 @@
       "populationText": "3.5M",
       "durationText": "Duration: More than 17 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "All national IDs (ePassport, ID, DL, VL and more) are issued by SuperCom",
-        "",
-        "",
-        "",
         ""
       ],
       "bigImpression": [
@@ -185,7 +183,7 @@
       "populationText": "97M",
       "durationText": "More than 11 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Issued over 2M Passports",
         "",
         "",
@@ -210,7 +208,7 @@
       "populationText": "320K",
       "durationText": "More than 7 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Graphical and Electronic Personalization",
         "",
         "",
@@ -235,7 +233,7 @@
       "populationText": "44M",
       "durationText": "1 year",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Raw Materials & Consumables",
         "High Security Features",
         "",
@@ -260,7 +258,7 @@
       "populationText": "7M",
       "durationText": "5 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "High Security Features",
         "Issued millions of Passports",
         "",
@@ -285,7 +283,7 @@
       "populationText": "7M",
       "durationText": "10 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Issued: over 10 million of cards",
         "",
         "",
@@ -310,7 +308,7 @@
       "populationText": "60K",
       "durationText": "10 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "",
         "",
         "",
@@ -335,7 +333,7 @@
       "populationText": "63M",
       "durationText": "7 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Software, consumables, Maintenance & Support",
         "Distributed passport personalization across the UK",
         "",
@@ -360,7 +358,7 @@
       "populationText": "3 years",
       "durationText": "Over4years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Drivers & Vehicle Registration",
         "",
         "",
@@ -385,7 +383,7 @@
       "populationText": "8M",
       "durationText": "6 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Software Applications",
         "Cards personalization & Delivery",
         "",
@@ -410,7 +408,7 @@
       "populationText": "9M",
       "durationText": "3 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Drivers, Vehicles cards",
         "Special durable card material",
         "!!!",
@@ -435,7 +433,7 @@
       "populationText": "22M",
       "durationText": "4 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Hundreds of capture stations",
         "Decentralized ID Card personalization",
         "Software, consumables & support",
@@ -460,7 +458,7 @@
       "populationText": "38M",
       "durationText": "4 years",
       "projectTypeText": "Delivery",
-      "highlight": [
+      "highlights": [
         "Contactless smart Passport inlays",
         "Supplied over than 2M smart Passport Inlays",
         "!!!",
