@@ -19,11 +19,12 @@
 
         angular.module('globeLocation',[])
             .controller('mainCtrl',function($scope,$http,$document){
+                var locationIndex = 0;
                 $http.get('config.json').success(function (data) {
                     /*INIT GLOBE*/
                     earth = new WE.map('earth_div',data.globe);
                     //GO TO first location WITH ZOOM 5
-                    earth.setView(data.locations[0].point, data.globe.zoom);
+                    earth.setView(data.locations[locationIndex].point, data.globe.zoom);
                     //ADD CUSTOM MAP LYERES
                     angular.forEach(data.tileSources, function (tile) {
                         WE.tileLayer(tile.baseUrl,tile).addTo(earth);
@@ -33,7 +34,8 @@
                       var marker =  WE.marker(location.point).addTo(earth);
                           marker.element.dataset.locationIndex = index;
                           angular.element(marker.element).on('click', function () {
-                              $scope.location = data.locations[this.dataset.locationIndex];
+                              locationIndex = this.dataset.locationIndex;
+                              $scope.location = data.locations[locationIndex];
                               $scope.isPopupOpen = true;
                               $scope.$digest();
                           });
@@ -43,9 +45,22 @@
                     $scope.isPopupOpen = false;
 
                     angular.element('.cover-layer').on('click',function () {
-                        $scope.isPopupOpen = false;
+                         $scope.isPopupOpen = false;
+                         $scope.$digest();
+                    });
+                    angular.element('.button.prev-location').on('click',function(){
+                        locationIndex = (--locationIndex) % data.locations.length;
+                        $scope.location = data.locations[locationIndex];
+                        earth.panTo($scope.location.point,{duration:0.4});
+                        $scope.$digest();
+                    });
+                    angular.element('.button.next-location').on('click',function(){
+                        locationIndex = (++locationIndex) % data.locations.length;
+                        $scope.location = data.locations[locationIndex];
+                        earth.panTo($scope.location.point,{duration:0.4});
                         $scope.$digest();
                     })
+
                 })
 
             })
@@ -53,7 +68,13 @@
 </head>
 <body ng-controller="mainCtrl">
     <div id="earth_div"></div>
-    <div class="cover-layer" ng-show="isPopupOpen">
+    <div class="container" ng-show="isPopupOpen">
+        <div class="cover-layer"></div>
+        <div class="button next-location">
+            <span class="icon arrow-2-left"></span>
+            <span class="icon arrow-2-right"></span>
+        </div>
+        <div class="button prev-location"></div>
         <div id="popupContainer" >
         <div class="popup">
             <div class="partition left-side">
@@ -62,14 +83,13 @@
                 </div>
                 <div class="image-navigation">
                     <div class="image-controller previous-image">
-                        <span class="icon arrow-1-left"><<</span>
+                        <span class="icon arrow-1-left"></span>
                     </div>
                     <div class="image-controller next-image">
-                        <span class="icon arrow-2-right">>></span>
+                        <span class="icon arrow-1-right">>></span>
                     </div>
                     <div class="image-description">
-
-
+                        {{location.bigImpression[0].description}}
                     </div>
                 </div>
             </div>
@@ -105,8 +125,7 @@
             </div>
         </div>
     </div>
-        <div class="button next-location"></div>
-        <div class="button prev-location"></div>
+
     </div>
     <style>
         .we-pm-icon{
@@ -115,6 +134,8 @@
             background-size: cover;
             height: 80px !important;
             width: 80px !important;
+            margin-top: -80px !important;
+            margin-left: -40px !important;
 
         }
     </style>

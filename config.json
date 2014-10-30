@@ -9,7 +9,9 @@
       46.8011,
       8.2266
     ],
-    "zoom": 3.4
+    "zoom": 3.4,
+    "minZoom":1,
+    "maxZoom":10
   },
   "tileSources": [
     {
@@ -39,13 +41,12 @@
         "Improved number of issued DL cards",
         "Reduced Drivers fraud",
         "Reduced car accidents",
-        "Issued over 1.5 smart Driver Licenses",
-        ""
+        "Issued over 1.5 smart Driver Licenses"       
       ],
       "bigImpression": [
         {
           "image": "tanzania.jpg",
-          "description": ""
+          "description": "registration"
         }
       ]
     },
@@ -162,9 +163,6 @@
       "projectTypeText": "Delivery",
       "highlights": [
         "All national IDs (ePassport, ID, DL, VL and more) are issued by SuperCom",
-        "",
-        "",
-        "",
         ""
       ],
       "bigImpression": [
